@@ -72,7 +72,7 @@ class App extends Component {
           <Container>
             <Logo src="/logo.png" />
             <Input placeholder="Email" />
-            <Input placeholder="Password" />
+            <Input placeholder="Password" type="password" />
             <Button>Login</Button>
             <Link>Forgot your password?</Link>
             <SignUp>New here? Sign up.</SignUp>
