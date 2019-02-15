@@ -24,5 +24,16 @@ def main():
 # sign up
 
 # profile
+@app.route('/profile', methods=['GET'])
+def get_profile_info():
+	user_id = request.user_id
+	return profile.get_profile_info(user_id)
+
+@app.route('/profile', methods=['POST'])
+def set_profile_info():
+	user_id = request.user_id
+	country_of_origin = request.country_of_origin
+	return profile.set_profile_info(user_id, country_of_origin)
+
 if __name__ == '__main__':
-	app.run(debug = True) 
+	app.run(debug = True)
