@@ -23,6 +23,30 @@ def main():
 
 # sign up
 
+
+@app.route('/register', methods=['POST'])
+def register():
+    if(request.method == 'POST'):
+        # store account information into database (create new user)
+        # user email
+        # user login
+        # user password
+        #error checking
+
+        db.createUser({
+            user: #getuserinfohere
+            pwd: #getuserpasswordhere
+            email: #getuseremailhere
+
+        })
+
+
+    else:   #request.method == 'GET'
+        return render_template('register.html')
+
+
+
+
 # profile
 if __name__ == '__main__':
 	app.run(debug = True) 
