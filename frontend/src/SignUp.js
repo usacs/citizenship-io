@@ -41,8 +41,7 @@ const Input = styled.input`
   margin-bottom: 16px;
 `;
 
-
-const SignUp = styled.div`
+const SignUpBar = styled.div`
   color: white;
   width: fit-content;
   font-size: 14px;
@@ -68,10 +67,10 @@ const Header = styled.div`
   margin: 10px;
   color: white;
   font-weight: 700;
-  font-size: 100;
+  font-size: 24px;
 `;
 
-class App extends Component {
+class SignUp extends Component {
   render() {
     return (
       <div>
@@ -80,10 +79,9 @@ class App extends Component {
             <Logo src="/logo.png" />
             <Header>Sign Up</Header>
             <Input placeholder="Email" />
-            <Input placeholder="Password" />
+            <Input placeholder="Enter a password" />
+            <Input placeholder="Reenter your Password" />
             <Button>Sign Up</Button>
-            <Link>Forgot your password?</Link>
-            <SignUp>New here? Sign up.</SignUp>
           </Container>
         </Main>
       </div>
@@ -91,4 +89,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default SignUp;
