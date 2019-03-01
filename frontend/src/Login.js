@@ -5,6 +5,7 @@ import styled from "styled-components";
 const Logo = styled.img`
   width: 100%;
   margin-bottom: 24px;
+  margin-top: 24px;
 `;
 
 const Main = styled.div`

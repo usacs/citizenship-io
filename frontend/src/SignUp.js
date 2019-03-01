@@ -4,6 +4,7 @@ import styled from "styled-components";
 const Logo = styled.img`
   width: 100%;
   margin-bottom: 24px;
+  margin-top: 24px;
 `;
 
 const Main = styled.div`
@@ -79,8 +80,8 @@ class SignUp extends Component {
             <Logo src="/logo.png" />
             <Header>Sign Up</Header>
             <Input placeholder="Email" />
-            <Input placeholder="Enter a password" />
-            <Input placeholder="Reenter your Password" />
+            <Input placeholder="Enter a password" type="password" />
+            <Input placeholder="Reenter your Password" type="password" />
             <Button>Sign Up</Button>
           </Container>
         </Main>
