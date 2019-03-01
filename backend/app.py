@@ -32,8 +32,8 @@ def get_profile_info():
 @app.route('/profile', methods=['POST'])
 def set_profile_info():
 	user_id = request.user_id
-	country_of_origin = request.country_of_origin
-	return profile.set_profile_info(user_id, country_of_origin)
+	user_data = request.user_data
+	return profile.set_profile_info(user_id, user_data)
 
 if __name__ == '__main__':
 	app.run(debug = True)
