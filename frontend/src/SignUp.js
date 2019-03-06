@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 const Logo = styled.img`
   width: 100%;
@@ -72,6 +73,41 @@ const Header = styled.div`
 `;
 
 class SignUp extends Component {
+  state = {
+    email: "",
+    password: "",
+    passwordRepeat: ""
+  };
+
+  handleChangeEmail = event => {
+    this.setState({ email: event.target.value });
+  };
+
+  handleChangePassword = event => {
+    this.setState({ password: event.target.value });
+  };
+
+  handleChangePasswordRepeat = event => {
+    this.setState({ passwordRepeat: event.target.value });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    const user = {
+      email: this.state.email,
+      password: this.state.password,
+      passwordRepeat: this.state.passwordRepeat
+    };
+
+    axios
+      .post(`https://jsonplaceholder.typicode.com/users`, { user })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      });
+  };
+
   render() {
     return (
       <div>
@@ -79,10 +115,20 @@ class SignUp extends Component {
           <Container>
             <Logo src="/logo.png" />
             <Header>Sign Up</Header>
-            <Input placeholder="Email" />
-            <Input placeholder="Enter a password" type="password" />
-            <Input placeholder="Reenter your Password" type="password" />
-            <Button>Sign Up</Button>
+            <form onSubmit={this.handleSubmit}>
+              <Input placeholder="Email" onChange={this.handleChangeEmail} />
+              <Input
+                placeholder="Enter a password"
+                type="password"
+                onChange={this.handleChangePassword}
+              />
+              <Input
+                placeholder="Reenter your Password"
+                type="password"
+                onChange={this.handleChangePasswordRepeat}
+              />
+              <Button type="submit">Sign Up</Button>
+            </form>
           </Container>
         </Main>
       </div>
