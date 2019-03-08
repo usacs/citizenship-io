@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import axios from "axios";
+import Axios from "axios";
 
 const Logo = styled.img`
   width: 100%;
@@ -91,7 +91,7 @@ class SignUp extends Component {
     this.setState({ passwordRepeat: event.target.value });
   };
 
-  handleSubmit = event => {
+  /*handleSubmit = event => {
     event.preventDefault();
 
     const user = {
@@ -106,6 +106,57 @@ class SignUp extends Component {
         console.log(res);
         console.log(res.data);
       });
+  };*/
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    const email = {
+      email: this.state.email
+    };
+
+    const password = {
+      password: this.state.password
+    };
+
+    const passwordRepeat = {
+      passwordRepeat: this.state.passwordRepeat
+    };
+
+    if (this.state.password != this.state.passwordRepeat) {
+      alert("Passwords do not match");
+      console.error(
+        "An error occured while making the request: Passwords do not match"
+      );
+      //console.log(password);
+      //console.log(passwordRepeat);
+    } else {
+      Axios.post(`/signup`, { email, password })
+        .then(res => {
+          console.log(email);
+          console.log(password);
+          // check status code
+
+          res = { statusCode: 200 };
+
+          // if successful re-route to profile
+          if (res.data.statusCode === 200) {
+            // *** remember to set status code in backend ***
+            const parsedData = JSON.parse(res.data.body);
+            this.props.history.push({
+              pathname: "/profile",
+              state: { data: parsedData }
+            });
+          } else {
+            // if not successful, return alert
+            alert("Validation error occurred. " + res.data.body);
+            console.log("Error " + res.data.statusCode);
+          }
+        })
+        .catch(err => {
+          console.error("An error occured while making the request");
+        });
+    }
   };
 
   render() {
