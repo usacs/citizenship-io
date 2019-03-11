@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import Axios from "axios";
 
 const Logo = styled.img`
   width: 100%;
   margin-bottom: 24px;
+  margin-top: 24px;
 `;
 
 const Main = styled.div`
@@ -41,8 +43,7 @@ const Input = styled.input`
   margin-bottom: 16px;
 `;
 
-
-const SignUp = styled.div`
+const SignUpBar = styled.div`
   color: white;
   width: fit-content;
   font-size: 14px;
@@ -68,10 +69,96 @@ const Header = styled.div`
   margin: 10px;
   color: white;
   font-weight: 700;
-  font-size: 100;
+  font-size: 24px;
 `;
 
-class App extends Component {
+class SignUp extends Component {
+  state = {
+    email: "",
+    password: "",
+    passwordRepeat: ""
+  };
+
+  handleChangeEmail = event => {
+    this.setState({ email: event.target.value });
+  };
+
+  handleChangePassword = event => {
+    this.setState({ password: event.target.value });
+  };
+
+  handleChangePasswordRepeat = event => {
+    this.setState({ passwordRepeat: event.target.value });
+  };
+
+  /*handleSubmit = event => {
+    event.preventDefault();
+
+    const user = {
+      email: this.state.email,
+      password: this.state.password,
+      passwordRepeat: this.state.passwordRepeat
+    };
+
+    axios
+      .post(`https://jsonplaceholder.typicode.com/users`, { user })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      });
+  };*/
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    const email = {
+      email: this.state.email
+    };
+
+    const password = {
+      password: this.state.password
+    };
+
+    const passwordRepeat = {
+      passwordRepeat: this.state.passwordRepeat
+    };
+
+    if (this.state.password != this.state.passwordRepeat) {
+      alert("Passwords do not match");
+      console.error(
+        "An error occured while making the request: Passwords do not match"
+      );
+      //console.log(password);
+      //console.log(passwordRepeat);
+    } else {
+      Axios.post(`/signup`, { email, password })
+        .then(res => {
+          console.log(email);
+          console.log(password);
+          // check status code
+
+          res = { statusCode: 200 };
+
+          // if successful re-route to profile
+          if (res.data.statusCode === 200) {
+            // *** remember to set status code in backend ***
+            const parsedData = JSON.parse(res.data.body);
+            this.props.history.push({
+              pathname: "/profile",
+              state: { data: parsedData }
+            });
+          } else {
+            // if not successful, return alert
+            alert("Validation error occurred. " + res.data.body);
+            console.log("Error " + res.data.statusCode);
+          }
+        })
+        .catch(err => {
+          console.error("An error occured while making the request");
+        });
+    }
+  };
+
   render() {
     return (
       <div>
@@ -79,11 +166,20 @@ class App extends Component {
           <Container>
             <Logo src="/logo.png" />
             <Header>Sign Up</Header>
-            <Input placeholder="Email" />
-            <Input placeholder="Password" />
-            <Button>Sign Up</Button>
-            <Link>Forgot your password?</Link>
-            <SignUp>New here? Sign up.</SignUp>
+            <form onSubmit={this.handleSubmit}>
+              <Input placeholder="Email" onChange={this.handleChangeEmail} />
+              <Input
+                placeholder="Enter a password"
+                type="password"
+                onChange={this.handleChangePassword}
+              />
+              <Input
+                placeholder="Reenter your Password"
+                type="password"
+                onChange={this.handleChangePasswordRepeat}
+              />
+              <Button type="submit">Sign Up</Button>
+            </form>
           </Container>
         </Main>
       </div>
@@ -91,4 +187,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default SignUp;
