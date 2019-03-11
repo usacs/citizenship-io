@@ -100,7 +100,7 @@ class SignUp extends Component {
       passwordRepeat: this.state.passwordRepeat
     };
 
-    axios
+    Axios
       .post(`https://jsonplaceholder.typicode.com/users`, { user })
       .then(res => {
         console.log(res);
