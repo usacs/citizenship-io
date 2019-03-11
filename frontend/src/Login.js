@@ -1,15 +1,18 @@
 import React, { Component } from "react";
+import { Link as L } from "react-router-dom";
 import styled from "styled-components";
 
 const Logo = styled.img`
   width: 100%;
   margin-bottom: 24px;
+  margin-top: 24px;
 `;
 
 const Main = styled.div`
   background-color: #334c7b;
   width: 100vw;
   height: 100vh;
+  padding-top: 100px;
 `;
 
 const Container = styled.div`
@@ -17,7 +20,7 @@ const Container = styled.div`
   width: 24rem;
 `;
 
-const Link = styled.a`
+const LinkButton = styled.a`
   font-size: 14px;
   width: fit-content;
   color: white;
@@ -41,7 +44,7 @@ const Input = styled.input`
   margin-bottom: 16px;
 `;
 
-const SignUp = styled.div`
+const SignUp = styled.a`
   color: white;
   width: fit-content;
   font-size: 14px;
@@ -63,7 +66,11 @@ const Button = styled.button`
   background-color: #d03c42;
 `;
 
-class App extends Component {
+const Link = styled(L)`
+  color: white;
+`;
+
+class Login extends Component {
   render() {
     return (
       <div>
@@ -71,10 +78,12 @@ class App extends Component {
           <Container>
             <Logo src="/logo.png" />
             <Input placeholder="Email" />
-            <Input placeholder="Password" />
+            <Input placeholder="Password" type="password" />
             <Button>Login</Button>
-            <Link>Forgot your password?</Link>
-            <SignUp>New here? Sign up.</SignUp>
+            <LinkButton>Forgot your password?</LinkButton>
+            <SignUp>
+              New here? <Link to="/signup">Sign up.</Link>
+            </SignUp>
           </Container>
         </Main>
       </div>
@@ -82,4 +91,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Login;
