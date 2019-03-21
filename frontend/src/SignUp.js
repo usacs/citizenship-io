@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import Axios from "axios";
+import logo from "./static/logo.png";
 
 const Logo = styled.img`
   width: 100%;
@@ -41,8 +43,7 @@ const Input = styled.input`
   margin-bottom: 16px;
 `;
 
-
-const SignUp = styled.div`
+/*const SignUp = styled.div`
   color: white;
   width: fit-content;
   font-size: 14px;
@@ -50,7 +51,7 @@ const SignUp = styled.div`
   margin-top: 80px;
   margin-bottom: 15px;
   display: block;
-`;
+`;*/
 
 const Button = styled.button`
   font-weight: 700;
@@ -71,19 +72,32 @@ const Header = styled.div`
   font-size: 100;
 `;
 
-class App extends Component {
+class SignUpPage extends Component {
+  constructor() {
+    super();
+    this.state = {
+      Email: "",
+      Password: ""
+    };
+  }
+  handleLogin = e => {
+    e.preventDefault();
+    Axios.post("/signup", this.state).then(resp => {
+      if (resp.statusCode == 200) {
+        //redirect to profile
+      }
+    });
+  };
   render() {
     return (
       <div>
         <Main>
           <Container>
-            <Logo src="/logo.png" />
+            <img src={logo} />
             <Header>Sign Up</Header>
             <Input placeholder="Email" />
             <Input placeholder="Password" />
             <Button>Sign Up</Button>
-            <Link>Forgot your password?</Link>
-            <SignUp>New here? Sign up.</SignUp>
           </Container>
         </Main>
       </div>
@@ -91,4 +105,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default SignUpPage;

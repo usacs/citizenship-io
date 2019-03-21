@@ -69,7 +69,7 @@ class App extends Component {
       <div>
         <Main>
           <Container>
-            <Logo src="/logo.png" />
+            <Logo src="../public/logo.png" />
             <Input placeholder="Email" />
             <Input placeholder="Password" />
             <Button>Login</Button>

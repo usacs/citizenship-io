@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import SignUpPage from "./SignUp";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import Home from "./Home";
 
 const Logo = styled.img`
   width: 100%;
@@ -65,19 +69,21 @@ const Button = styled.button`
 `;
 
 class App extends Component {
+  constructor() {
+    super();
+  }
+  handleSignup = e => {
+    this.props.history.push("/signup");
+  };
   render() {
     return (
       <div>
-        <Main>
-          <Container>
-            <Logo src="/logo.png" />
-            <Input placeholder="Email" />
-            <Input placeholder="Password" />
-            <Button>Login</Button>
-            <Link>Forgot your password?</Link>
-            <SignUp>New here? Sign up.</SignUp>
-          </Container>
-        </Main>
+        <Router>
+          <div className="container-fluid">
+            <Route exact path="/" component={Home} />
+            <Route exact path="/signup" component={SignUpPage} />
+          </div>
+        </Router>
       </div>
     );
   }

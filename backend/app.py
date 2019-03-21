@@ -4,10 +4,9 @@ from flask_pymongo import PyMongo
 app = Flask(__name__, template_folder="../frontend/build", static_folder="../frontend/build/static") # remember to compile React app separately
 
 # database config
-"""
-app.config[] = ""
+
+app.config['MONGO_URI'] = "mongodb://localhost:27017/citizenship-io"
 db = PyMongo(app)
-"""
 
 """
 @app.route("/", methods=['GET'])
