@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link as L } from "react-router-dom";
 import styled from "styled-components";
+import logo from "./static/logo.png";
 
 const Logo = styled.img`
   width: 100%;
@@ -76,7 +77,7 @@ class Login extends Component {
       <div>
         <Main>
           <Container>
-            <Logo src="/logo.png" />
+            <Logo src={logo}/>
             <Input placeholder="Email" />
             <Input placeholder="Password" type="password" />
             <Button>Login</Button>

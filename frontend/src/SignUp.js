@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import Axios from "axios";
+import logo from "./static/logo.png";
 
 const Logo = styled.img`
   width: 100%;
@@ -164,7 +165,7 @@ class SignUp extends Component {
       <div>
         <Main>
           <Container>
-            <Logo src="/logo.png" />
+            <Logo src={logo} />
             <Header>Sign Up</Header>
             <form onSubmit={this.handleSubmit}>
               <Input placeholder="Email" onChange={this.handleChangeEmail} />
