@@ -92,27 +92,10 @@ class SignUp extends Component {
     this.setState({ passwordRepeat: event.target.value });
   };
 
-  /*handleSubmit = event => {
-    event.preventDefault();
-
-    const user = {
-      email: this.state.email,
-      password: this.state.password,
-      passwordRepeat: this.state.passwordRepeat
-    };
-
-    Axios
-      .post(`https://jsonplaceholder.typicode.com/users`, { user })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      });
-  };*/
-
   handleSubmit = event => {
     event.preventDefault();
 
-    const email =  this.state.email;
+    const email = this.state.email;
     const password = this.state.password;
     const passwordRepeat = this.state.passwordRepeat;
 
@@ -125,31 +108,29 @@ class SignUp extends Component {
       //console.log(passwordRepeat);
     } else {
       const request = {
-          "email":this.state.email,
-          "password":this.state.password
-      }
-      Axios.post(`/signup`, request)
-        .then(res => {
-          console.log(email);
-          console.log(password);
-          // check status code
+        email: this.state.email,
+        password: this.state.password
+      };
+      Axios.post(`/signup`, request).then(res => {
+        console.log(email);
+        console.log(password);
+        // check status code
 
-          console.log(res.data.statusCode)
+        console.log(res.data.statusCode);
 
-          // if successful re-route to profile
-          if (res.data.statusCode === 200) {
-            // *** remember to set status code in backend ***
-            this.props.history.push({
-              pathname: "/profile",
-              state: res.data
-            });
-          } else {
-            // if not successful, return alert
-            alert("Validation error occurred. " + res.data);
-            console.log("Error " + res.data.statusCode);
-          }
-        })
-     
+        // if successful re-route to profile
+        if (res.data.statusCode === 200) {
+          // *** remember to set status code in backend ***
+          this.props.history.push({
+            pathname: "/profile",
+            state: res.data
+          });
+        } else {
+          // if not successful, return alert
+          alert("Validation error occurred. " + res.data);
+          console.log("Error " + res.data.statusCode);
+        }
+      });
     }
   };
 

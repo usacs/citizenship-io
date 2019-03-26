@@ -19,16 +19,31 @@ def main():
 	return render_template('index.html')
 
 # login
-
+@app.route('/login', methods=['POST'])
+def login():
+    if(request.method == 'POST'):
+        data = json.loads(request.data)
+        print(data)
+        # check database for this info
+        user = mongo.db['users'] # load user collection  
+        doc = user.find_one({"email": data["email"]})
+        print(doc)
+        if(doc is None): # user does not exist
+            print("not working")
+            return jsonify({"statusCode": 400})
+        else: # user exists. success
+            print("working!!!!")
+            return jsonify({"statusCode": 200})
+        
 # sign up
 @app.route('/signup', methods=['POST'])
 def signup():
     if(request.method == 'POST'):
         print(json.loads(request.data))
         # store account information into database (create new user)
-        user = mongo.db['users']
+        user = mongo.db['users'] # load user table
 	
-		# befoe adding into db, error check!!!!!
+		# before adding into db, error check!!!!!
 
         account_id = user.insert_one(request.get_json()).inserted_id
         return jsonify({"statusCode" : 200})
