@@ -57,5 +57,16 @@ def signup():
 
 
 # profile
+@app.route('/profile', methods=['GET'])
+def get_profile_info():
+	user_id = request.user_id
+	return profile.get_profile_info(user_id)
+
+@app.route('/profile', methods=['POST'])
+def set_profile_info():
+	user_id = request.user_id
+	user_data = request.user_data
+	return profile.set_profile_info(user_id, user_data)
+
 if __name__ == '__main__':
-	app.run(debug = True) 
+	app.run(debug = True)
