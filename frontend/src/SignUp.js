@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import Axios from "axios";
+import logo from "./static/logo.png";
 
 const Logo = styled.img`
   width: 100%;
@@ -91,37 +92,12 @@ class SignUp extends Component {
     this.setState({ passwordRepeat: event.target.value });
   };
 
-  /*handleSubmit = event => {
-    event.preventDefault();
-
-    const user = {
-      email: this.state.email,
-      password: this.state.password,
-      passwordRepeat: this.state.passwordRepeat
-    };
-
-    Axios
-      .post(`https://jsonplaceholder.typicode.com/users`, { user })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      });
-  };*/
-
   handleSubmit = event => {
     event.preventDefault();
 
-    const email = {
-      email: this.state.email
-    };
-
-    const password = {
-      password: this.state.password
-    };
-
-    const passwordRepeat = {
-      passwordRepeat: this.state.passwordRepeat
-    };
+    const email = this.state.email;
+    const password = this.state.password;
+    const passwordRepeat = this.state.passwordRepeat;
 
     if (this.state.password != this.state.passwordRepeat) {
       alert("Passwords do not match");
@@ -131,31 +107,30 @@ class SignUp extends Component {
       //console.log(password);
       //console.log(passwordRepeat);
     } else {
-      Axios.post(`/signup`, { email, password })
-        .then(res => {
-          console.log(email);
-          console.log(password);
-          // check status code
+      const request = {
+        email: this.state.email,
+        password: this.state.password
+      };
+      Axios.post(`/signup`, request).then(res => {
+        console.log(email);
+        console.log(password);
+        // check status code
 
-          res = { statusCode: 200 };
+        console.log(res.data.statusCode);
 
-          // if successful re-route to profile
-          if (res.data.statusCode === 200) {
-            // *** remember to set status code in backend ***
-            const parsedData = JSON.parse(res.data.body);
-            this.props.history.push({
-              pathname: "/profile",
-              state: { data: parsedData }
-            });
-          } else {
-            // if not successful, return alert
-            alert("Validation error occurred. " + res.data.body);
-            console.log("Error " + res.data.statusCode);
-          }
-        })
-        .catch(err => {
-          console.error("An error occured while making the request");
-        });
+        // if successful re-route to profile
+        if (res.data.statusCode === 200) {
+          // *** remember to set status code in backend ***
+          this.props.history.push({
+            pathname: "/profile",
+            state: res.data
+          });
+        } else {
+          // if not successful, return alert
+          alert("Validation error occurred. " + res.data);
+          console.log("Error " + res.data.statusCode);
+        }
+      });
     }
   };
 
@@ -164,7 +139,7 @@ class SignUp extends Component {
       <div>
         <Main>
           <Container>
-            <Logo src="/logo.png" />
+            <Logo src={logo} />
             <Header>Sign Up</Header>
             <form onSubmit={this.handleSubmit}>
               <Input placeholder="Email" onChange={this.handleChangeEmail} />
