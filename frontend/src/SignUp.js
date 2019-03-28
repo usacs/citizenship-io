@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import Axios from "axios";
+import { Link as L } from "react-router-dom";
 
 const Logo = styled.img`
   width: 100%;
@@ -12,6 +13,7 @@ const Main = styled.div`
   background-color: #334c7b;
   width: 100vw;
   height: 100vh;
+  padding-top: 100px;
 `;
 
 const Container = styled.div`
@@ -19,14 +21,14 @@ const Container = styled.div`
   width: 24rem;
 `;
 
-const Link = styled.a`
+/*const Link = styled.a`
   font-size: 14px;
   width: fit-content;
   color: white;
   display: block;
   margin: 0 auto;
   margin-top: 16px;
-`;
+`;*/
 
 const Input = styled.input`
   color: white;
@@ -70,6 +72,10 @@ const Header = styled.div`
   color: white;
   font-weight: 700;
   font-size: 24px;
+`;
+
+const Link = styled(L)`
+  color: white;
 `;
 
 class SignUp extends Component {
@@ -178,7 +184,9 @@ class SignUp extends Component {
                 type="password"
                 onChange={this.handleChangePasswordRepeat}
               />
-              <Button type="submit">Sign Up</Button>
+              <Link to="/makeprofile">
+                <Button type="submit">Sign Up</Button>
+              </Link>
             </form>
           </Container>
         </Main>
