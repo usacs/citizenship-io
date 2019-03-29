@@ -5,17 +5,11 @@ Paramters: user_info: {user_id: ###, additional_data: ...}
 Returns: res: {code: ###, message: "Code information}
 */
 export const set_profile_info = user_data => {
-  if (user_data.user_id == null) {
-    return { code: -1, message: "User_id missing. Required parameter" };
-  }
-  return axios
-    .post("/profile", {
-      user_id: user_info.user_id,
-      user_data: user_data
-    })
-    .then(res => {
-      console.log(res);
-    });
+  return Axios.post("/profile", {
+    user_data
+  }).then(res => {
+    console.log(res);
+  });
 };
 
 /**

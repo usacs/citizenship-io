@@ -2,7 +2,7 @@ import pymongo
 
 # parameters: user id: int, country_of_origin: string
 # takes properties passed by user_data and adds them/replaces document of that user
-def set_profile_info(user_id, user_data):
+def set_profile_info(user_data):
     client = MongoClient()
     # connect to database
 
