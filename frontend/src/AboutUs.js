@@ -85,7 +85,14 @@ const MemberRole = styled.div`
   font-size: 20px;
 `;
 
-export class About extends Component {
+const Heading = styled.div`
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 0;
+  left: 0;
+`;
+export class AboutUs extends Component {
   render() {
     return (
       <div>
@@ -267,4 +274,4 @@ export class About extends Component {
   }
 }
 
-export default About;
+export default AboutUs;
