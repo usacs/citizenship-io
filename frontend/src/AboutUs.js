@@ -15,22 +15,19 @@ const LogoBackground = styled.div`
   background: url("Related_Resources/Banner.png") no-repeat center;
   background-size: cover;
   background-attachment: fixed;
-  height: 600px;
+  height: 700px;
 `;
 
-/*const Revolutionary = styled.div`
-  background: url("Related_Resources/Revolutionary.jpg") no-repeat center;
-  background-size: cover;
-  background-attachment: fixed;
-  height: 500px;
-`;*/
+const Revolutionary = styled.img`
+  height: 400px;
+  width: 1000px;
+  border-radius: 50px;
+`;
 
-/*const Duolingo = styled.div`
-  background: url("Related_Resources/Duolingo.jpg") no-repeat center;
-  background-size: cover;
-  background-attachment: fixed;
-  height: 500px;
-`;*/
+const Duolingo = styled.img`
+  height: 400px;
+  border-radius: 50px;
+`;
 
 const Img = styled.img`
   height: 200px;
@@ -110,9 +107,9 @@ export class AboutUs extends Component {
             for the citizenship test. (A bunch of other stuff).
           </p>
 
-          <h2>
+          <h1>
             <u>Mission</u>
-          </h2>
+          </h1>
 
           <p>
             Increase the passing rate of the Hispanic
@@ -127,55 +124,55 @@ export class AboutUs extends Component {
 
           <Slider>
             <Img src="Citizenship-io_Members/Amulya.jpg" />
-            <span>Amulya</span>
+            <span>Amulya Mummaneni</span>
             <Overlay className="overlay overlayLeft">
-              <MemberRole>Amulya Leader</MemberRole>
+              <a href="https://www.linkedin.com/in/amulyamummaneni/">
+                <MemberRole>
+                  https://www.linkedin
+                  <br />
+                  .com/in/
+                  <br />
+                  amulyamummaneni/
+                </MemberRole>
+              </a>
             </Overlay>
           </Slider>
 
           <Slider>
             <Img src="Citizenship-io_Members/Rishab.jpg" />
-            <span>Rishab</span>
+            <span>Rishab Chawla</span>
             <Overlay className="overlay overlayLeft">
-              <MemberRole>Rishab Leader</MemberRole>
-            </Overlay>
-          </Slider>
-
-          <Slider>
-            <Img src="Citizenship-io_Members/Hari.jpg" />
-            <span>Hari</span>
-            <Overlay className="overlay overlayLeft">
-              <MemberRole>Hari</MemberRole>
+              <a href="https://www.linkedin.com/in/rishab-chawla/">
+                <MemberRole>
+                  https://www.linkedin
+                  <br />
+                  .com/in/
+                  <br />
+                  rishab-chawla/
+                </MemberRole>
+              </a>
             </Overlay>
           </Slider>
 
           <Slider>
             <Img src="Citizenship-io_Members/Srihari.jpg" />
-            <span>Srihari</span>
+            <span>Srihari Shankar</span>
             <Overlay className="overlay overlayLeft">
-              <MemberRole>Srihari</MemberRole>
-            </Overlay>
-          </Slider>
-
-          <Slider>
-            <Img src="Citizenship-io_Members/Adirupa.jpg" />
-            <span>Adirupa</span>
-            <Overlay className="overlay overlayLeft">
-              <MemberRole>Adirupa</MemberRole>
-            </Overlay>
-          </Slider>
-
-          <Slider>
-            <Img src="Citizenship-io_Members/Aditya.jpg" />
-            <span>Aditya</span>
-            <Overlay className="overlay overlayLeft">
-              <MemberRole>Aditya</MemberRole>
+              <a href="https://www.linkedin.com/in/srihari-shankar-a45029134/">
+                <MemberRole>
+                  https://www.linkedin
+                  <br />
+                  .com/in/
+                  <br />
+                  srihari-shankar-a45029134/
+                </MemberRole>
+              </a>
             </Overlay>
           </Slider>
 
           <Slider>
             <Img src="Citizenship-io_Members/Akshay.jpg" />
-            <span>Akshay</span>
+            <span>Akshay Sapra</span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Akshay</MemberRole>
             </Overlay>
@@ -183,95 +180,108 @@ export class AboutUs extends Component {
 
           <Slider>
             <Img src="Citizenship-io_Members/Amber.jpg" />
-            <span>Amber</span>
+            <span>Amber Rawson</span>
             <Overlay className="overlay overlayLeft">
-              <MemberRole>Amber</MemberRole>
+              <a href="https://www.linkedin.com/in/amberrawson/">
+                <MemberRole>
+                  https://www.linkedin
+                  <br />
+                  .com/in/
+                  <br />
+                  amberrawson/
+                </MemberRole>
+              </a>
             </Overlay>
           </Slider>
 
           <Slider>
             <Img src="Citizenship-io_Members/Basim.jpg" />
-            <span>Basim</span>
+            <span>
+              Basim <br />
+              Jaffer
+            </span>
             <Overlay className="overlay overlayLeft">
-              <MemberRole>Basim</MemberRole>
-            </Overlay>
-          </Slider>
-
-          <Slider>
-            <Img src="Citizenship-io_Members/Clarissa.jpg" />
-            <span>Clarissa</span>
-            <Overlay className="overlay overlayLeft">
-              <MemberRole>Clarissa</MemberRole>
+              <a href="https://www.linkedin.com/in/basim-j-372728b1/">
+                <MemberRole>
+                  https://www.linkedin
+                  <br />
+                  .com/in/
+                  <br />
+                  basim-j-372728b1/
+                </MemberRole>
+              </a>
             </Overlay>
           </Slider>
 
           <Slider>
             <Img src="Citizenship-io_Members/Ethan.jpg" />
-            <span>Ethan</span>
+            <span>Ethan Febinger</span>
             <Overlay className="overlay overlayLeft">
-              <MemberRole>Ethan</MemberRole>
-            </Overlay>
-          </Slider>
-
-          <Slider>
-            <Img src="Citizenship-io_Members/Johnathan.jpg" />
-            <span>Johnathan</span>
-            <Overlay className="overlay overlayLeft">
-              <MemberRole>Johnathan</MemberRole>
-            </Overlay>
-          </Slider>
-
-          <Slider>
-            <Img src="Citizenship-io_Members/Kaan.jpg" />
-            <span>Kaan</span>
-            <Overlay className="overlay overlayLeft">
-              <MemberRole>Kaan</MemberRole>
+              <a href="https://www.linkedin.com/in/ethan-febinger-400a27176/">
+                <MemberRole>
+                  https://www.linkedin
+                  <br />
+                  .com/in/
+                  <br />
+                  ethan-febinger-400a27176/
+                </MemberRole>
+              </a>
             </Overlay>
           </Slider>
 
           <Slider>
             <Img src="Citizenship-io_Members/Kevin.jpg" />
-            <span>Kevin</span>
+            <span>
+              Kevin <br />
+              Wu
+            </span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Kevin</MemberRole>
             </Overlay>
           </Slider>
 
           <Slider>
-            <Img src="Citizenship-io_Members/Mahwish.jpg" />
-            <span>Mahwish</span>
-            <Overlay className="overlay overlayLeft">
-              <MemberRole>Mahwish</MemberRole>
-            </Overlay>
-          </Slider>
-
-          <Slider>
             <Img src="Citizenship-io_Members/Michael.jpg" />
-            <span>Michael</span>
+            <span>
+              Michael <br />
+              Seo
+            </span>
             <Overlay className="overlay overlayLeft">
-              <MemberRole>Michael</MemberRole>
+              <a href="https://www.linkedin.com/in/michael-seo-635753172/">
+                <MemberRole>
+                  https://www.linkedin
+                  <br />
+                  .com/in/
+                  <br />
+                  michael-seo-635753172/
+                </MemberRole>
+              </a>
             </Overlay>
           </Slider>
 
           <Slider>
             <Img src="Citizenship-io_Members/Sam.jpg" />
-            <span>Sam</span>
+            <span>
+              Sam
+              <br />
+              Olagun
+            </span>
             <Overlay className="overlay overlayLeft">
-              <MemberRole>Sam</MemberRole>
-            </Overlay>
-          </Slider>
-
-          <Slider>
-            <Img src="Citizenship-io_Members/Sriya.jpg" />
-            <span>Sriya</span>
-            <Overlay className="overlay overlayLeft">
-              <MemberRole>Sriya</MemberRole>
+              <a href="https://www.linkedin.com/in/sam-olagun/">
+                <MemberRole>
+                  https://www.linkedin
+                  <br />
+                  .com/in/
+                  <br />
+                  sam-olagun/
+                </MemberRole>
+              </a>
             </Overlay>
           </Slider>
 
           <Slider>
             <Img src="Citizenship-io_Members/Wingjun.jpg" />
-            <span>Wingjun</span>
+            <span>Wingjun Chan</span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Wingjun</MemberRole>
             </Overlay>
@@ -279,11 +289,25 @@ export class AboutUs extends Component {
 
           <Slider>
             <Img src="Citizenship-io_Members/Xiwen.jpg" />
-            <span>Xiwen</span>
+            <span>
+              Xiwen
+              <br />
+              Shen
+            </span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Xiwen</MemberRole>
             </Overlay>
           </Slider>
+
+          <h1>Related Resources</h1>
+
+          <a href="https://www.duolingo.com/">
+            <Duolingo src="Related_Resources/Duolingo.jpg" />
+          </a>
+
+          <a href="http://eagleton.rutgers.edu/?fbclid=IwAR36HcV58Gf1QfiIpCEUImrtM1hwh_vSdnWSOf9gDT9Ni-OvdvNNxS5s5sI">
+            <Revolutionary src="Related_Resources/Revolutionary.jpg" />
+          </a>
         </Main>
       </div>
     );
