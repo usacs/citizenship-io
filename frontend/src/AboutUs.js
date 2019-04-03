@@ -18,19 +18,19 @@ const LogoBackground = styled.div`
   height: 600px;
 `;
 
-const Revolutionary = styled.div`
+/*const Revolutionary = styled.div`
   background: url("Related_Resources/Revolutionary.jpg") no-repeat center;
   background-size: cover;
   background-attachment: fixed;
   height: 500px;
-`;
+`;*/
 
-const Duolingo = styled.div`
+/*const Duolingo = styled.div`
   background: url("Related_Resources/Duolingo.jpg") no-repeat center;
   background-size: cover;
   background-attachment: fixed;
   height: 500px;
-`;
+`;*/
 
 const Img = styled.img`
   height: 200px;
@@ -61,7 +61,7 @@ const Slider = styled.div`
   position: relative;
   width: 200px;
   height 200px;
-  margin: 10px;
+  margin: 30px;
   display: inline-block;
   &:hover{
     .overlay{
@@ -110,8 +110,6 @@ export class AboutUs extends Component {
             for the citizenship test. (A bunch of other stuff).
           </p>
 
-          <Revolutionary />
-
           <h2>
             <u>Mission</u>
           </h2>
@@ -123,14 +121,13 @@ export class AboutUs extends Component {
             <br /> a virtual application
           </p>
 
-          <Duolingo />
-
           <h1>
             <u>Who we are</u>
           </h1>
 
           <Slider>
             <Img src="Citizenship-io_Members/Amulya.jpg" />
+            <span>Amulya</span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Amulya Leader</MemberRole>
             </Overlay>
@@ -138,6 +135,7 @@ export class AboutUs extends Component {
 
           <Slider>
             <Img src="Citizenship-io_Members/Rishab.jpg" />
+            <span>Rishab</span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Rishab Leader</MemberRole>
             </Overlay>
@@ -145,6 +143,7 @@ export class AboutUs extends Component {
 
           <Slider>
             <Img src="Citizenship-io_Members/Hari.jpg" />
+            <span>Hari</span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Hari</MemberRole>
             </Overlay>
@@ -152,6 +151,7 @@ export class AboutUs extends Component {
 
           <Slider>
             <Img src="Citizenship-io_Members/Srihari.jpg" />
+            <span>Srihari</span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Srihari</MemberRole>
             </Overlay>
@@ -159,6 +159,7 @@ export class AboutUs extends Component {
 
           <Slider>
             <Img src="Citizenship-io_Members/Adirupa.jpg" />
+            <span>Adirupa</span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Adirupa</MemberRole>
             </Overlay>
@@ -166,6 +167,7 @@ export class AboutUs extends Component {
 
           <Slider>
             <Img src="Citizenship-io_Members/Aditya.jpg" />
+            <span>Aditya</span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Aditya</MemberRole>
             </Overlay>
@@ -173,6 +175,7 @@ export class AboutUs extends Component {
 
           <Slider>
             <Img src="Citizenship-io_Members/Akshay.jpg" />
+            <span>Akshay</span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Akshay</MemberRole>
             </Overlay>
@@ -180,6 +183,7 @@ export class AboutUs extends Component {
 
           <Slider>
             <Img src="Citizenship-io_Members/Amber.jpg" />
+            <span>Amber</span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Amber</MemberRole>
             </Overlay>
@@ -187,6 +191,7 @@ export class AboutUs extends Component {
 
           <Slider>
             <Img src="Citizenship-io_Members/Basim.jpg" />
+            <span>Basim</span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Basim</MemberRole>
             </Overlay>
@@ -194,6 +199,7 @@ export class AboutUs extends Component {
 
           <Slider>
             <Img src="Citizenship-io_Members/Clarissa.jpg" />
+            <span>Clarissa</span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Clarissa</MemberRole>
             </Overlay>
@@ -201,6 +207,7 @@ export class AboutUs extends Component {
 
           <Slider>
             <Img src="Citizenship-io_Members/Ethan.jpg" />
+            <span>Ethan</span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Ethan</MemberRole>
             </Overlay>
@@ -208,6 +215,7 @@ export class AboutUs extends Component {
 
           <Slider>
             <Img src="Citizenship-io_Members/Johnathan.jpg" />
+            <span>Johnathan</span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Johnathan</MemberRole>
             </Overlay>
@@ -215,6 +223,7 @@ export class AboutUs extends Component {
 
           <Slider>
             <Img src="Citizenship-io_Members/Kaan.jpg" />
+            <span>Kaan</span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Kaan</MemberRole>
             </Overlay>
@@ -222,6 +231,7 @@ export class AboutUs extends Component {
 
           <Slider>
             <Img src="Citizenship-io_Members/Kevin.jpg" />
+            <span>Kevin</span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Kevin</MemberRole>
             </Overlay>
@@ -229,6 +239,7 @@ export class AboutUs extends Component {
 
           <Slider>
             <Img src="Citizenship-io_Members/Mahwish.jpg" />
+            <span>Mahwish</span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Mahwish</MemberRole>
             </Overlay>
@@ -236,6 +247,7 @@ export class AboutUs extends Component {
 
           <Slider>
             <Img src="Citizenship-io_Members/Michael.jpg" />
+            <span>Michael</span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Michael</MemberRole>
             </Overlay>
@@ -243,6 +255,7 @@ export class AboutUs extends Component {
 
           <Slider>
             <Img src="Citizenship-io_Members/Sam.jpg" />
+            <span>Sam</span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Sam</MemberRole>
             </Overlay>
@@ -250,6 +263,7 @@ export class AboutUs extends Component {
 
           <Slider>
             <Img src="Citizenship-io_Members/Sriya.jpg" />
+            <span>Sriya</span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Sriya</MemberRole>
             </Overlay>
@@ -257,6 +271,7 @@ export class AboutUs extends Component {
 
           <Slider>
             <Img src="Citizenship-io_Members/Wingjun.jpg" />
+            <span>Wingjun</span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Wingjun</MemberRole>
             </Overlay>
@@ -264,6 +279,7 @@ export class AboutUs extends Component {
 
           <Slider>
             <Img src="Citizenship-io_Members/Xiwen.jpg" />
+            <span>Xiwen</span>
             <Overlay className="overlay overlayLeft">
               <MemberRole>Xiwen</MemberRole>
             </Overlay>
