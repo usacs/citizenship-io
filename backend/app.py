@@ -1,6 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template,jsonify,request,json
 from flask_pymongo import PyMongo
 from pymongo import MongoClient
+import bcrypt
 
 app = Flask(__name__, template_folder="../frontend/build", static_folder="../frontend/build/static") # remember to compile React app separately
 
@@ -31,28 +32,28 @@ collection = db['users']
 @app.route('/signup', methods=['POST'])
 def signup():
     if(request.method == 'POST'):
-        if(request.form['submit'] == 'Enter'):
         # store account information into database (create new user)
         # user email
-        # user login
         # user password
+
         #error checking
+            print(json.loads(request.data))
+            # loads the information into data
+            data = json.loads(request.data)
+            storedEmail = user.find_one({"email": data["email"]})
+            user = mongo.db['user_info'] # loads user table
             account = {
-                    "first_name": request.form['firstname'],
-                    "last_name": request.form['lastname'],
-                    "username": request.form['username'],
-                    "password": request.form['password'],
-                    "email": request.form['email']
+                    "email" : data["email"]
+                    "password" : sha256_crypt.encrypt(data["password"])
             }
-            accounts = db.accounts
-            account_id = accounts.insert_one(account).inserted_id
 
-    else:
-        pass
-
-    #Wait for the render_template from front end page
-    return render_template('index.html', title="Sign Up")
+            if(storedEmail is None):          #check if user's email already exists in the table, if not put the hash in 
+                account_id = user.insert_one(account).inserted_id
             
+            return jsonify({"statusCode":200})
+    else:
+        return jsonify({"statusCode":500})
+
 
 
 
