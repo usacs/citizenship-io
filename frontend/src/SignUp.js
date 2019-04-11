@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import Axios from "axios";
 import { Link as L } from "react-router-dom";
+import Cookies from "universal-cookie";
 
 const Logo = styled.img`
   width: 100%;
@@ -149,6 +150,10 @@ class SignUp extends Component {
           if (res.data.statusCode === 200) {
             // *** remember to set status code in backend ***
             const parsedData = JSON.parse(res.data.body);
+
+            const cookies = new Cookies();
+            cookies.set("email", this.state.email, { path: "/" });
+
             this.props.history.push({
               pathname: "/profile",
               state: { data: parsedData }

@@ -66,31 +66,31 @@ const Button = styled.button`
   background-color: #d03c42;
 `;
 
+const Header = styled.div`
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 15px;
+  color: white;
+  font-weight: 700;
+  font-size: 48px;
+  text-align: left;
+`;
+
 const Link = styled(L)`
   color: white;
 `;
 
-class Login extends Component {
+class HomePage extends Component {
   render() {
     return (
       <div>
         <Main>
-          <Container>
-            <Logo src="/logo.png" />
-            <Input placeholder="Email" />
-            <Input placeholder="Password" type="password" />
-            <Link to="/homepage">
-              <Button>Login</Button>
-            </Link>
-            <LinkButton>Forgot your password?</LinkButton>
-            <SignUp>
-              New here? <Link to="/signup">Sign up.</Link>
-            </SignUp>
-          </Container>
+          <Header>Welcome to The Citizenship Project!</Header>
+          <Header>Lets Get Started.</Header>
         </Main>
       </div>
     );
   }
 }
 
-export default Login;
+export default HomePage;

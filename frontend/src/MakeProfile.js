@@ -3,6 +3,8 @@ import styled from "styled-components";
 import CreatableSelect from "react-select/lib/Creatable";
 import Axios from "axios";
 import Select from "react-select";
+import Cookies from "universal-cookie";
+import { Link as L } from "react-router-dom";
 
 const Logo = styled.img`
   width: 100%;
@@ -23,14 +25,14 @@ const Container = styled.div`
   width: 24rem;
 `;
 
-const Link = styled.a`
+/*const Link = styled.a`
   font-size: 14px;
   width: fit-content;
   color: white;
   display: block;
   margin: 0 auto;
   margin-top: 16px;
-`;
+`;*/
 
 const Input = styled.input`
   color: white;
@@ -70,14 +72,31 @@ const Button = styled.button`
 `;
 
 const Header = styled.div`
-  margin: 10px;
-  padding: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 15px;
   color: white;
+  font-weight: 700;
+  font-size: 48px;
+  text-align: left;
+`;
+
+const Header2 = styled.div`
+  padding-left: 30px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-top: 0px;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  text-align: left;
+`;
+
+const Bubble = styled.div`
   background-color: #d03c42;
   border-radius: 25px;
-  font-weight: 700;
-  font-size: 36px;
-  text-align: center;
+  padding-bottom: 50px;
+  padding-top: 50px;
 `;
 
 const Title = styled.div`
@@ -88,99 +107,146 @@ const Title = styled.div`
   font-size: 18px;
 `;
 
-const optionsColors = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" }
-];
+const Link = styled(L)`
+  color: white;
+`;
 
 const optionsRace = [
-  { value: "api", label: "Asian / Pacific Islander" },
-  { value: "baa", label: "Black or African American" },
-  { value: "h", label: "Hispanic" },
-  { value: "aian", label: "American Indian or Alaskan Native" },
-  { value: "wc", label: "White / Caucasian" },
-  { value: "o", label: "Other" }
+  { value: 0, label: "Asian / Pacific Islander" },
+  { value: 1, label: "Black or African American" },
+  { value: 2, label: "Hispanic" },
+  { value: 3, label: "American Indian or Alaskan Native" },
+  { value: 4, label: "White / Caucasian" },
+  { value: 5, label: "Other" }
 ];
 
 const optionsGender = [
-  { value: "male", label: "Male" },
-  { value: "female", label: "Female" },
-  { value: "preferNot", label: "Prefer not to say" }
+  { value: 0, label: "Male" },
+  { value: 1, label: "Female" },
+  { value: 2, label: "Prefer not to say" }
 ];
 
 const optionsEducation = [
-  { value: "noFormal", label: "No Formal Education" },
-  { value: "highScool", label: "High School" },
-  { value: "associate", label: "Associate Degree" },
-  { value: "bachelors", label: "Bachelor's Degree" },
-  { value: "masters", label: "Master's / Doctorate" },
-  { value: "preferNot", label: "Prefer not to say" }
+  { value: 0, label: "No Formal Education" },
+  { value: 1, label: "High School" },
+  { value: 2, label: "Associate Degree" },
+  { value: 3, label: "Bachelor's Degree" },
+  { value: 4, label: "Master's / Doctorate" },
+  { value: 5, label: "Prefer not to say" }
 ];
 
 const optionsMarital = [
-  { value: "api", label: "Single" },
-  { value: "baa", label: "Married" },
-  { value: "h", label: "Divorced" },
-  { value: "preferNot", label: "Prefer not to say" }
+  { value: 0, label: "Single" },
+  { value: 1, label: "Married" },
+  { value: 2, label: "Divorced" },
+  { value: 3, label: "Prefer not to say" }
 ];
 
 const optionsIncome = [
-  { value: "a", label: "<$20,000" },
-  { value: "b", label: "$20,000 - $44,999" },
-  { value: "c", label: "$45,000 - $139,999	" },
-  { value: "d", label: ">$140,000" }
+  { value: 0, label: "<$20,000" },
+  { value: 1, label: "$20,000 - $44,999" },
+  { value: 2, label: "$45,000 - $139,999	" },
+  { value: 3, label: ">$140,000" }
 ];
 
 const optionsJobType = [
-  { value: "a", label: "Accounting" },
-  { value: "a", label: "Administrative/Clerical" },
-  { value: "a", label: "Arts/Entertainment/Media" },
-  { value: "a", label: "Automotive" },
-  { value: "a", label: "Biotechnology" },
-  { value: "a", label: "Business" },
-  { value: "a", label: "Construction" },
-  { value: "a", label: "Customer Service" },
-  { value: "a", label: "Education" },
-  { value: "a", label: "Engineering" },
-  { value: "a", label: "Executive" },
-  { value: "a", label: "Facilities" },
-  { value: "a", label: "Financial Services" },
-  { value: "a", label: "Government" },
-  { value: "a", label: "Healthcare" },
-  { value: "a", label: "Hospitality" },
-  { value: "a", label: "Human Resources" },
-  { value: "a", label: "Information Technology" },
-  { value: "a", label: "Insurance" },
-  { value: "a", label: "Law Enforcement" },
-  { value: "a", label: "Legal" },
-  { value: "a", label: "Manufacturing/Production" },
-  { value: "a", label: "Marketing" },
-  { value: "a", label: "Real Estate" },
-  { value: "a", label: "Retail/Wholesale" },
-  { value: "a", label: "Sales" },
-  { value: "a", label: "Science" },
-  { value: "a", label: "Telecommunications" },
-  { value: "a", label: "Transportation/Warehouse" }
+  { value: 0, label: "Accounting" },
+  { value: 1, label: "Administrative/Clerical" },
+  { value: 2, label: "Arts/Entertainment/Media" },
+  { value: 3, label: "Automotive" },
+  { value: 4, label: "Biotechnology" },
+  { value: 5, label: "Business" },
+  { value: 6, label: "Construction" },
+  { value: 7, label: "Customer Service" },
+  { value: 8, label: "Education" },
+  { value: 9, label: "Engineering" },
+  { value: 10, label: "Executive" },
+  { value: 11, label: "Facilities" },
+  { value: 12, label: "Financial Services" },
+  { value: 13, label: "Government" },
+  { value: 14, label: "Healthcare" },
+  { value: 15, label: "Hospitality" },
+  { value: 16, label: "Human Resources" },
+  { value: 17, label: "Information Technology" },
+  { value: 18, label: "Insurance" },
+  { value: 19, label: "Law Enforcement" },
+  { value: 20, label: "Legal" },
+  { value: 21, label: "Manufacturing/Production" },
+  { value: 22, label: "Marketing" },
+  { value: 23, label: "Real Estate" },
+  { value: 24, label: "Retail/Wholesale" },
+  { value: 25, label: "Sales" },
+  { value: 26, label: "Science" },
+  { value: 27, label: "Telecommunications" },
+  { value: 28, label: "Transportation/Warehouse" }
 ];
 
 class MakeProfile extends Component {
   state = {
-    email: "",
-    password: "",
-    passwordRepeat: ""
+    First_name: "",
+    Last_name: "",
+    Date_of_birth: "",
+    Race: "",
+    Gender: "",
+    Education: "",
+    Family_num: "",
+    Child_num: "",
+    Marriage_status: "",
+    Income_range: "",
+    Job_type: {},
+    Years_in_us: ""
   };
 
-  handleChangeEmail = event => {
-    this.setState({ email: event.target.value });
+  handleChangeFirstName = event => {
+    this.setState({ First_name: event.target.value });
   };
 
-  handleChangePassword = event => {
-    this.setState({ password: event.target.value });
+  handleChangeLastName = event => {
+    this.setState({ Last_name: event.target.value });
   };
 
-  handleChangePasswordRepeat = event => {
-    this.setState({ passwordRepeat: event.target.value });
+  handleChangeDateOfBirth = event => {
+    this.setState({ Date_of_birth: event.target.value });
+  };
+
+  handleChangeRace = event => {
+    this.setState({ Race: event.label });
+  };
+
+  handleChangeGender = event => {
+    this.setState({ Gender: event.label });
+  };
+
+  handleChangeEducation = event => {
+    this.setState({ Education: event.label });
+  };
+
+  handleChangeFamilyNum = event => {
+    this.setState({ Family_num: event.target.value });
+  };
+
+  handleChangeChildNum = event => {
+    this.setState({ Child_num: event.target.value });
+  };
+
+  handleChangeMarriageStatus = event => {
+    this.setState({ Marriage_status: event.label });
+  };
+
+  handleChangeIncomeRange = event => {
+    this.setState({ Income_range: event.label });
+  };
+
+  handleChangeJobType = event => {
+    var value = [];
+    for (var i = 0, l = event.length; i < l; i++) {
+      value.push(event[i].label);
+    }
+    this.setState({ Job_type: value });
+  };
+
+  handleChangeYearsInUS = event => {
+    this.setState({ Years_in_us: event.target.value });
   };
 
   /*handleSubmit = event => {
@@ -203,6 +269,9 @@ class MakeProfile extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
+    console.log(this.state);
+    console.log(optionsRace[this.state.Race]);
+
     const email = {
       email: this.state.email
     };
@@ -213,6 +282,12 @@ class MakeProfile extends Component {
 
     const passwordRepeat = {
       passwordRepeat: this.state.passwordRepeat
+    };
+
+    const cookies = new Cookies();
+
+    const body = {
+      email: cookies.get("email")
     };
 
     if (this.state.password != this.state.passwordRepeat) {
@@ -256,13 +331,16 @@ class MakeProfile extends Component {
       <div>
         <Main>
           <Container>
-            <Header>Profile Creation</Header>
+            <Bubble>
+              <Header>Profile Creation</Header>
+              <Header2>Fill out the forms below to get started.</Header2>
+            </Bubble>
             <form onSubmit={this.handleSubmit}>
               <Title>First Name</Title>
-              <Input placeholder="" />
+              <Input placeholder="" onChange={this.handleChangeFirstName} />
 
               <Title>Last Name</Title>
-              <Input placeholder="" />
+              <Input placeholder="" onChange={this.handleChangeLastName} />
 
               <Title>Date of Birth</Title>
               <Input
@@ -272,6 +350,7 @@ class MakeProfile extends Component {
                 id="dob"
                 type="date"
                 class="is-touched is-pristine av-valid form-control"
+                onChange={this.handleChangeDateOfBirth}
               />
 
               <Title>Race</Title>
@@ -280,6 +359,7 @@ class MakeProfile extends Component {
                 options={optionsRace}
                 className="basic-multi-select"
                 classNamePrefix="select"
+                onChange={this.handleChangeRace}
               />
 
               <Title>Gender</Title>
@@ -288,6 +368,7 @@ class MakeProfile extends Component {
                 options={optionsGender}
                 className="basic-multi-select"
                 classNamePrefix="select"
+                onChange={this.handleChangeGender}
               />
 
               <Title>Education</Title>
@@ -296,12 +377,23 @@ class MakeProfile extends Component {
                 options={optionsEducation}
                 className="basic-multi-select"
                 classNamePrefix="select"
+                onChange={this.handleChangeEducation}
               />
               <Title>Number of Family Members</Title>
-              <Input type="number" min="0" max="10" />
+              <Input
+                type="number"
+                min="0"
+                max="10"
+                onChange={this.handleChangeFamilyNum}
+              />
 
               <Title>Number of Children</Title>
-              <Input type="number" min="0" max="10" />
+              <Input
+                type="number"
+                min="0"
+                max="10"
+                onChange={this.handleChangeChildNum}
+              />
 
               <Title>Marriage Status</Title>
               <Select
@@ -309,6 +401,7 @@ class MakeProfile extends Component {
                 options={optionsMarital}
                 className="basic-multi-select"
                 classNamePrefix="select"
+                onChange={this.handleChangeMarriageStatus}
               />
 
               <Title>Income Range</Title>
@@ -317,6 +410,7 @@ class MakeProfile extends Component {
                 options={optionsIncome}
                 className="basic-multi-select"
                 classNamePrefix="select"
+                onChange={this.handleChangeIncomeRange}
               />
               <Title>Job Type</Title>
               <CreatableSelect
@@ -325,11 +419,18 @@ class MakeProfile extends Component {
                 options={optionsJobType}
                 className="basic-multi-select"
                 classNamePrefix="select"
+                onChange={this.handleChangeJobType}
               />
               <Title>Years in the US</Title>
-              <Input type="number" min="0" max="60" />
-
-              <Button type="submit">Sign Up</Button>
+              <Input
+                type="number"
+                min="0"
+                max="60"
+                onChange={this.handleChangeYearsInUS}
+              />
+              <Link to="/homepage">
+                <Button type="submit">Sign Up</Button>
+              </Link>
             </form>
           </Container>
         </Main>
