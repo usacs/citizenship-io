@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link as L } from "react-router-dom";
 import styled from "styled-components";
+import logo from "./static/logo.png";
+import Axios from "axios";
 
 const Logo = styled.img`
   width: 100%;
@@ -71,6 +73,52 @@ const Link = styled(L)`
 `;
 
 class Login extends Component {
+  state = {
+    email: "",
+    password: "",
+    passwordRepeat: ""
+  };
+
+  handleChangeEmail = event => {
+    this.setState({ email: event.target.value });
+  };
+
+  handleChangePassword = event => {
+    this.setState({ password: event.target.value });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    const email = this.state.email;
+    const password = this.state.password;
+
+    const request = {
+      email: this.state.email,
+      password: this.state.password
+    };
+    Axios.post(`/login`, request).then(res => {
+      console.log(email);
+      console.log(password);
+      // check status code
+
+      console.log(res.data.statusCode);
+
+      // if successful re-route to profile
+      if (res.data.statusCode === 200) {
+        // *** remember to set status code in backend ***
+        this.props.history.push({
+          pathname: "/profile",
+          state: res.data
+        });
+      } else {
+        // if not successful, return alert
+        alert("Validation error occurred. " + res.data);
+        console.log("Error " + res.data.statusCode);
+      }
+    });
+  };
+
   render() {
     return (
       <div>
