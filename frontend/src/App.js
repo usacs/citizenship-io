@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import NavBar from './Navbar.js'
 
 const Logo = styled.img`
   width: 100%;
@@ -70,6 +71,7 @@ class App extends Component {
       <div>
         <Main>
           <Container>
+          <NavBar></NavBar>
             <Logo src="/logo.png" />
             <Input placeholder="Email" />
             <Input placeholder="Password" type="password" />
