@@ -124,20 +124,16 @@ class Login extends Component {
       <div>
         <Main>
           <Container>
-            <Logo src={logo} />
-            <form onSubmit={this.handleSubmit}>
-              <Input placeholder="Email" onChange={this.handleChangeEmail} />
-              <Input
-                placeholder="Password"
-                type="password"
-                onChange={this.handleChangePassword}
-              />
+            <Logo src="/logo.png" />
+            <Input placeholder="Email" />
+            <Input placeholder="Password" type="password" />
+            <Link to="/homepage">
               <Button>Login</Button>
-              <LinkButton>Forgot your password?</LinkButton>
-              <SignUp>
-                New here? <Link to="/signup">Sign up.</Link>
-              </SignUp>
-            </form>
+            </Link>
+            <LinkButton>Forgot your password?</LinkButton>
+            <SignUp>
+              New here? <Link to="/signup">Sign up.</Link>
+            </SignUp>
           </Container>
         </Main>
       </div>
