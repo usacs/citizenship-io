@@ -62,27 +62,24 @@ def signup():
 def get_profile_info():
 	user_data = json.loads(request.data)
 	email = user_data['email']
-        
-    users = mongo.db['user_info']
-    user_doc = users.find_one({"email": email})
-    # using user id from cookies:
-    if user_doc:
+	users = mongo.db['user_info']
+	user_doc = users.find_one({"email": email})
+	# using user id from cookies:
+	if user_doc:
         # make sure we sent user doc correctly
-        return jsonify({"statusCode": 200, "message": "User info retrieved successfully", "data": user_doc})
-    else:
-        return jsonify({"statusCode": 404, "message": "User not found"})
+		return jsonify({"statusCode": 200, "message": "User info retrieved successfully", "data": user_doc})
+	else:
+		return jsonify({"statusCode": 404, "message": "User not found"})
 
 @app.route('/profile', methods=['POST'])
 def set_profile_info():
 
-    # need to use cookies to get user id so we can look up proper document to update
+	# need to use cookies to get user id so we can look up proper document to update
 
 	user_data = request.data
-    users = mongo.db['user_info']
-
-    user_info.updateOne({"email": user_data['email']},request.get_json(), True)
-    
-    return jsonify({"statusCode": 200, "message": "User info saved successfully"})
+	users = mongo.db['user_info']
+	user_info.updateOne({"email": user_data['email']},request.get_json(), True)
+	return jsonify({"statusCode": 200, "message": "User info saved successfully"})
 
 if __name__ == '__main__':
 	app.run(debug = True)
