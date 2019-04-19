@@ -42,7 +42,7 @@ def signup():
     if(request.method == 'POST'):
         print(json.loads(request.data))
         # store account information into database (create new user)
-        user = mongo.db['user_info'] # load user table
+        user = mongo.db['users'] # load user table
 	
 		# before adding into db, error check!!!!!
 
