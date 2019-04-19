@@ -169,8 +169,10 @@ class SignUp extends Component {
                 type="password"
                 onChange={this.handleChangePasswordRepeat}
               />
+			 <Link to ="/makeprofile">
                 <Button type="submit">Sign Up</Button>
-            </form>
+             </Link>
+			</form>
           </Container>
         </Main>
       </div>
