@@ -134,7 +134,7 @@ class SignUp extends Component {
             cookies.set("email", this.state.email, { path: "/" });
 
             this.props.history.push({
-              pathname: "/profile",
+              pathname: "/makeprofile",
               state: { data: parsedData }
             });
           } else {
@@ -169,9 +169,7 @@ class SignUp extends Component {
                 type="password"
                 onChange={this.handleChangePasswordRepeat}
               />
-              <Link to="/makeprofile">
                 <Button type="submit">Sign Up</Button>
-              </Link>
             </form>
           </Container>
         </Main>
