@@ -5,11 +5,14 @@
   "dependencies": {
     "axios": "^0.18.0",
     "react": "^16.6.3",
+    "react-collapsible": "^2.6.0",
     "react-dom": "^16.6.3",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
     "react-select": "^2.4.2",
+    "react-simple-expand": "0.0.2",
+    "reactstrap": "^8.0.0",
     "styled-components": "^4.1.2",
     "universal-cookie": "^3.1.0"
   },
