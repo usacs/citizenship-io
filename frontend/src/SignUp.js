@@ -123,20 +123,17 @@ class SignUp extends Component {
           console.log(password);
           // check status code
 
-          res = { statusCode: 200 };
-
           // if successful re-route to profile
           if (res.data.statusCode === 200) {
             // *** remember to set status code in backend ***
-            const parsedData = JSON.parse(res.data.body);
-
+            
             const cookies = new Cookies();
             cookies.set("email", this.state.email, { path: "/" });
-
+            
             this.props.history.push({
-              pathname: "/makeprofile",
-              state: { data: parsedData }
+              pathname: "/makeprofile"
             });
+            
           } else {
             // if not successful, return alert
             alert("Validation error occurred. " + res.data.body);
@@ -169,9 +166,7 @@ class SignUp extends Component {
                 type="password"
                 onChange={this.handleChangePasswordRepeat}
               />
-			 <Link to ="/makeprofile">
                 <Button type="submit">Sign Up</Button>
-             </Link>
 			</form>
           </Container>
         </Main>
