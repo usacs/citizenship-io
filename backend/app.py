@@ -6,7 +6,7 @@ import profile
 app = Flask(__name__, template_folder="../frontend/build", static_folder="../frontend/build/static") # remember to compile React app separately
 
 # database config
-app.config['MONGO_URI'] = "mongodb://localhost:27017/citizenship-io"
+app.config['MONGO_URI'] = "mongodb+srv://citizenship-user:gang@cluster0-70ibb.mongodb.net/test?retryWrites=true"
 mongo = PyMongo(app)
 
 """
