@@ -1,6 +1,6 @@
 import requests
 
-login = {"email":"login3@test.com","password":"login3"}
+login = {"email":"login2@test.com","password":"login2"}
 
 print(requests.post('http://127.0.0.1:5000/register', json = login).json())
 data = requests.post('http://127.0.0.1:5000/login', json = login).json()

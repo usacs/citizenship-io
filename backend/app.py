@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from db.db_init import db
 from db.models import User, Token
 from imports.db_functions import create_user, login, logout
-from email.utils import parseaddr
+from functools import wraps
 
 app = Flask(__name__)
 app.config.from_pyfile('app.cfg')
@@ -12,10 +12,17 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
+def login_required(f):
+    @wraps(f)
+    def checkLogin(*args,**kwargs):
+        if request.headers.get("auth-token") is None:
+            return jsonify(status = "fail", message = "Auth-token not present in request header")
+        return f(*args,**kwargs)
+    return checkLogin  
+
 @app.route("/logout", methods=['POST'])
+@login_required
 def logoutRoute():
-    if request.headers.get("auth-token") is None:
-        return jsonify(status = "fail", message = "Auth-token not present in request header")
     token = request.headers["auth-token"]
     if logout(token):
         return jsonify(status = "success")
