@@ -1,7 +1,7 @@
 import sys
 sys.path.append("..")
 from db.db_init import db
-from db.models import User, Token
+from db.models import User, Token, Response
 from .login_functions import generate_salt, hash_pass, ver_pass_hash
 import random
 import secrets
@@ -41,6 +41,19 @@ def create_user(email,password):
     """
     user = User(user_id = new_id,password = hash_val,salt = SALT,email = email,permission = 0) 
     db.session.add(user)
+    db.session.commit()
+    return True
+
+def answer(user_id,question_id,answer,correct):
+    condition = True
+    response_id = 0
+    while condition:
+        response_id = random.randint(1,100000000000)
+        condition = (not Response.query.filter_by(response_id=response_id).first() is None)
+
+    response_inst = Response(response_id = response_id, user_id = user_id,question_id = question_id,value = answer, correct = correct)
+    print(response_inst)
+    db.session.add(response_inst)
     db.session.commit()
     return True
 

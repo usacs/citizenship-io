@@ -11,9 +11,10 @@ class Token(db.Model):
     user_id = db.Column(db.Integer, primary_key = True)
     value = db.Column(db.String(128), nullable=False)
 
-class Responses(db.Model):
-    user_id = db.Column(db.Integer, primary_key = True)
+class Response(db.Model):
+    response_id = db.Column(db.Integer, primary_key = True)
+    user_id = db.Column(db.Integer)
     question_id = db.Column(db.Integer)
     value = db.Column(db.Integer)
-    correct = db.Column(db.Text)
-
+    correct = db.Column(db.Boolean)
+  
