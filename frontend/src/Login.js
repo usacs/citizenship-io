@@ -1,14 +1,21 @@
 import React, { Component } from "react";
+import UserContext, { UserConsumer } from "./js/userContext";
 import { Link as L } from "react-router-dom";
 import styled from "styled-components";
 import logo from "./static/logo.png";
 import Axios from "axios";
 class Login extends Component {
-  state = {
-    email: "",
-    password: "",
-    passwordRepeat: ""
-  };
+  constructor(){
+    super();
+    this.state = {
+      email:"",
+      password:""
+    }
+    this.handleChangeEmail.bind(this);
+    this.handleChangePassword.bind(this);
+    this.handleSubmit.bind(this);
+  }
+  
 
   handleChangeEmail = event => {
     this.setState({ email: event.target.value });
@@ -23,12 +30,15 @@ class Login extends Component {
 
     const email = this.state.email;
     const password = this.state.password;
-
+    let token = "dwajiodwakjdqwj"
+    
+    this.props.setLogin({token:token,authenticated:true});
+    
     const request = {
       email: this.state.email,
       password: this.state.password
-    };
-    Axios.post(`/login`, request).then(res => {
+    }
+    Axios.post(`/api/login`, request).then(res => {
       console.log(email);
       console.log(password);
       // check status code
@@ -36,46 +46,36 @@ class Login extends Component {
       console.log(res.data.statusCode);
 
       // if successful re-route to profile
-      if (res.data.statusCode === 200) {
+      if (res.data.status === "success") {
+        console.log(res.data);
+        /*
         // *** remember to set status code in backend ***
         this.props.history.push({
           pathname: "/profile",
           state: res.data
         });
+        */
       } else {
-        // if not successful, return alert
-        alert("Validation error occurred. " + res.data);
-        console.log("Error " + res.data.statusCode);
+        console.log(res.data);
       }
+      
     });
+    
   };
 
   render() {
     return (
-        <div className="full-page darkblue justified-left aligned-center column">
-            <div className="centerer fill_container cap-width-50em padded" style={{flexGrow:2}}>
-              <input className="input" value="email" />
-              <input className="input" value="password" />
-              <div className="red button">
-                TEST
-              </div>
-              <div className="blue button">
-                TEST
-              </div>
-              <div className="grid-responsive full-width">
-                <div className="row">
-                  <div className="col-6-12-mobile lightpadding">
-                    <div className="red button">TEST2</div>
-                  </div>
-                  <div className="col-6-12-mobile lightpadding">
-                    <div className="red button">TEST2</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <div className="full-page darkblue justified-left aligned-center column">
+        <div className="centerer fill_container cap-width-50em padded" style={{ flexGrow: 2 }}>
+          <input className="input" onChange={this.handleChangeEmail} placeholder="email" />
+          <input className="input" onChange={this.handleChangePassword} type="password" placeholder="password" />
+          <div onClick={this.handleSubmit} className="red button">
+            LOGIN
           </div>
+        </div>
+      </div>
     );
   }
 }
-
+Login.contextType = UserContext;
 export default Login;

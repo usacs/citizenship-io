@@ -2,6 +2,7 @@
   "name": "citizenship.io",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/build",
   "dependencies": {
     "axios": "^0.18.0",
     "react": "^16.6.3",
@@ -10,12 +11,13 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
     "react-select": "^2.4.2",
+    "redux": "^4.0.4",
     "styled-components": "^4.1.2",
     "universal-cookie": "^3.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && rm -rf ../backend/build && mv build ../backend",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

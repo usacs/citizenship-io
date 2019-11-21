@@ -6,7 +6,7 @@ from imports.db_functions import answer, create_user, login, logout
 from functools import wraps
 import json
 
-app = Flask(__name__)
+app = Flask(__name__,static_folder="build")
 app.config.from_pyfile('app.cfg')
 db.init_app(app)
 
@@ -28,7 +28,12 @@ def login_required(f):
         return f(token_entry.user_id,*args,**kwargs)
     return checkLogin  
 
-@app.route("/response", methods=['POST'])
+@app.route('/en/', defaults={'path': ''})
+@app.route('/en/<path:path>')
+def catch_all(path):
+    return app.send_static_file("index.html")
+
+@app.route("/api/response", methods=['POST'])
 @login_required
 def responseRoute(user_id):
     data = request.json
@@ -45,7 +50,7 @@ def responseRoute(user_id):
     answer(user_id,question_id,provided_answer,correct)
     return jsonify(status = "success", correct = correct)
 
-@app.route("/questions")
+@app.route("/api/questions")
 def getQuestion():
     data = request.json
     if data is None or not isinstance(data,list):
@@ -66,7 +71,7 @@ def getQuestion():
         
     return jsonify(status = "success", questions = to_return)
 
-@app.route("/logout", methods=['POST'])
+@app.route("/api/logout", methods=['POST'])
 @login_required
 def logoutRoute(user_id):
     token = request.headers["auth-token"]
@@ -75,7 +80,7 @@ def logoutRoute(user_id):
         return jsonify(status = "success")
     return jsonify(status = "fail")
 
-@app.route("/login", methods=['POST'])
+@app.route("/api/login", methods=['POST'])
 def loginRoute():
     data = request.json
     if data.get("email") is None or data.get("password") is None:
@@ -85,7 +90,7 @@ def loginRoute():
         return jsonify(status = "fail", message = "Invalid email or password")
     return jsonify(status = "success", token=token)
 
-@app.route("/register", methods=['POST'])
+@app.route("/api/register", methods=['POST'])
 def register():
     data = request.json
     if data.get("email") is None or data.get("password") is None:
@@ -111,9 +116,5 @@ def users():
     mapped_responses = list(map(lambda x: "user_id:%s | question_id:%s | answer:%s | correct:%s" % (x.user_id,x.question_id,x.value,x.correct),responses))
     return jsonify(status = "success", users = mapped, tokens = mapped_tokens, responses = mapped_responses)
 
-@app.route("/")
-def index():
-    create_user("test@test.com","password123")
-    return app.send_static_file("html/index.html")
 
 
