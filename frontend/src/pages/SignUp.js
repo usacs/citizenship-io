@@ -5,7 +5,7 @@ import Axios from "axios";
 import { Link as L } from "react-router-dom";
 import Cookies from "universal-cookie";
 
-import logo from "./static/logo.png";
+import logo from "../static/logo.png";
 
 
 const Logo = styled.img`

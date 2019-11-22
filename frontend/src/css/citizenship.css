@@ -165,6 +165,31 @@
   box-sizing: border-box;
 }
 
+.navbar{
+  position:absolute;
+  font-size:1.3em;
+}
+
+.navbar-item{
+  color:white;
+  text-decoration: none;
+}
+.navbar-item-login{
+  margin-left:auto;
+  margin-right:1em;
+}
+.navbar-item:hover{
+  text-decoration: underline;
+}
+.nav-auth:hover{
+  text-decoration: none;
+}
+.nav-logout{
+  margin-left:1em;
+}
+.nav-logout:hover{
+  text-decoration: underline;
+}
 .padded {
   padding: 5em;
 }
@@ -199,6 +224,7 @@ html {
 
 body {
   min-height: 100%;
+  margin:0;
 }
 
 .width-90 {

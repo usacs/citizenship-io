@@ -1,16 +1,49 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import Login from "./Login";
-import SignUp from "./SignUp";
-import MakeProfile from "./MakeProfile";
-import HomePage from "./HomePage";
-import AboutUs from "./AboutUs";
-import Navbar from "./Navbar";
+import Login from "./pages/Login";
+import Quiz from "./pages/Quiz";
+import SignUp from "./pages/SignUp";
+import MakeProfile from "./pages/MakeProfile";
+import HomePage from "./pages/HomePage";
+import AboutUs from "./pages/AboutUs";
 
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 import UserProvider from "./js/userContext";
 
+
+class Navbar extends Component {
+  render() {
+    let get_right_component = (auth) => {
+      if(auth.authenticated == true){
+        return(
+          <div className="lightpadding navbar-item navbar-item-login nav-auth">
+            {auth.email} 
+            <span className="nav-logout">Log Out</span>
+          </div>
+
+        )
+      }
+      else{
+        return(
+          <Link className="lightpadding navbar-item navbar-item-login" to="/en/login" >
+           <span>Login</span>
+          </Link>
+        )
+      }
+    }
+    return(
+     <div className="full-width navbar justified-left">
+         <Link className="lightpadding navbar-item" to="/en/quiz" >
+          <span>Quiz</span>
+         </Link>
+         <Link className="lightpadding navbar-item" to="/en/aboutus" >
+           <span>About Us</span>
+         </Link>
+         {get_right_component(this.props.login_state)}
+     </div>)
+  };
+}
 
 class App extends Component {
   constructor(){
@@ -18,7 +51,8 @@ class App extends Component {
     this.state = {
       login_state:{
         authenticated:false,
-        token:""
+        token:"",
+        email:""
       }  
     }
     this.setLogin = this.setLogin.bind(this);
@@ -33,9 +67,10 @@ class App extends Component {
     return (
         <Router>
             <div>
-              <Navbar />
+              <Navbar login_state={this.state.login_state} />              
               <Route path="/en/aboutus" component={AboutUs} />
               <Route path="/en/login" render={(props)=><Login {...props} setLogin={this.setLogin}/>}/>
+              <Route path="/en/quiz" render={(props)=><Quiz {...props}/>}/>
               <Route path="/en/signup" component={SignUp} />
               <Route path="/en/makeprofile" component={MakeProfile} />
               <Route exact path="/en/" component={HomePage} />

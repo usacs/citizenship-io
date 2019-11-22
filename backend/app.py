@@ -53,6 +53,7 @@ def responseRoute(user_id):
 @app.route("/api/questions")
 def getQuestion():
     data = request.json
+    print(data)
     if data is None or not isinstance(data,list):
         return jsonify(status = "fail", message = "Malformed request")
     to_return = []

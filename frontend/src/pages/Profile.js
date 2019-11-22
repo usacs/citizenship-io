@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import funcs from "./profile_functions.js";
+import funcs from "../js/profile_functions.js";
 
 class Profile extends Component {
   render() {
