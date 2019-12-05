@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+import {Redirect} from "react-router-dom";
 import Axios from "axios";
+
+import {If} from "../js/helpers";
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -13,10 +16,12 @@ let getQuestions = (x) =>{
     for(let a = 0;a < x; a++){
       arr.push(getRandomInt(1,101));
     }
+    console.log("test1")
     Axios.get("/api/questions",{
-      data:arr
+      params:JSON.stringify(arr)
     }).then((res)=>{
-      if(res.data.success == "true"){
+      console.log(res);
+      if(res.data.status = "success"){
         resolve(res.data.questions);
       }
       reject(res.data.message);
@@ -25,66 +30,133 @@ let getQuestions = (x) =>{
 }
 
 
+class QuestionButton extends Component{
+  constructor(){
+    super();
+    this.getButtonClass = this.getButtonClass.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+  getButtonClass(){
+    switch(this.props.correct){
+      case 1: return "wrong";
+      case 2: return "correct";
+      default: return "";
+    }
+  }
+  handleClick(){
+    if(this.props.correct != 1 && this.props.correct != 2){
+      console.log("sending answer");
+      this.props.answerFunc(this.props.id);
+    }
+  }
+  render(){
+    return (<div onClick={()=>{this.handleClick()}} className={"button red " + this.getButtonClass()}>{this.props.text}</div>)
+  }
+}
+
+class Prompt extends Component{
+  constructor(){
+    super();
+    this.state = {
+      buttons:[0,0,0,0],
+      correct:false
+    };
+    this.submitAnswer = this.submitAnswer.bind(this);
+    this.handleNextQuestion = this.handleNextQuestion.bind(this);
+  }
+  handleNextQuestion(){
+    this.props.setQuestion(this.props.number + 1);
+    this.setState({
+      buttons:[0,0,0,0],
+      correct:false
+    })
+  }
+  submitAnswer(x){
+    let headers = {};
+    headers["auth-token"] = this.props.login_state.token;
+    //ANSWER IS from 1-4 while button ids are from 0-3, offset by one to adjust
+    Axios({method:"post", url: "/api/response",data:{
+      question_id:this.props.question.question_id,
+      answer:(x+1)
+    },headers:headers}).then((res)=>{
+      let new_arr = [...this.state.buttons];
+      if(res.data.status == "success" && res.data.correct == false){
+        new_arr[x] = 1;
+        this.setState({
+          buttons:new_arr
+        })
+      } 
+      else if(res.data.status == "success" && res.data.correct == true){
+        this.setState({
+          correct:true
+        });
+        new_arr = new_arr.map((a,index)=>{
+          if(index != x) return 1;
+          return 2;
+        })
+        this.setState({
+          buttons:new_arr
+        })
+      } 
+      else{
+        console.log("ERROR");
+      }
+    })
+  }
+  render(){   
+    return(
+      <div className="centerer fill_container cap-width-50em padded" style={{flexGrow:2}}>
+        <div className="grid-responsive full-width">
+          <div className="row">
+            <div className="col-6-12-mobile">
+              <h1 className="full-width text-left">Question {this.props.number}</h1>
+            </div>
+            <div className="col-6-12-mobile">
+              <If condition={this.state.correct == true}>
+                <div onClick={()=>{this.handleNextQuestion()}} className="button yellow">
+                  Next Question
+                </div>
+              </If>
+            </div>
+          </div>
+        </div>
+        <p className="text">{this.props.question.value} </p>
+        {this.props.question.answers.map((x,index)=>(<QuestionButton correct={this.state.buttons[index]} answerFunc={this.submitAnswer} id={index} text={x} />))}
+      </div>)
+  }
+}
+
 class Quiz extends Component {
   constructor() {
     super();
+    this.state = {
+      questions: [{value:"test",answers:[]}],
+      current_question: 0,
+
+    }
+    this.setQuestion = this.setQuestion.bind(this);
   }
-  handleSubmit = event => {
-    event.preventDefault();
-
-    const email = this.state.email;
-    const password = this.state.password;
-    let token = "dwajiodwakjdqwj";
-
-    const request = {
-      email: this.state.email,
-      password: this.state.password
-    };
-    Axios.post(`/api/login`, request).then(res => {
-      console.log(email);
-      console.log(password);
-      // check status code
-
-      console.log(res.data.statusCode);
-
-      // if successful re-route to profile
-      if (res.data.status === "success") {
-        token = res.data.token;
-        this.props.setLogin({
-          email:email,
-          token: token,
-          authenticated: true
-        });
-        this.props.history.push("/en/signup");
-        /*
-         // *** remember to set status code in backend ***
-         this.props.history.push({
-           pathname: "/profile",
-           state: res.data
-         });
-         */
-      } else {
-        console.log(res.data);
-      }
-    });
-  };
   async componentDidMount(){
     let x = await getQuestions(10);
-    console.log(x);
+    this.setState({questions:x,current_question:1});
+  }
+  setQuestion(a){
+    this.setState({
+      current_question:a,
+      correct:false
+    });
   }
   render() {
-    return (
-       <div class="full-page darkblue justified-left aligned-center column">
-        <div class="centerer fill_container cap-width-50em padded" style={{flexGrow:2}}>
-          <h1 class="full-width text-left">Question 1</h1>
-          <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et neque auctor, tincidunt libero sit amet, laoreet ipsum. Etiam a erat vitae est convallis sollicitudin. Aliquam erat volutpat. Aenean a maximus sem, sed cursus nulla. Donec a tristique turpis. Ut scelerisque viverra odio, quis commodo erat. Fusce risus ipsum, maximus sed neque sit amet, semper pulvinar enim. Nullam aliquam dolor ex, eu condimentum tellus blandit non. Pellentesque posuere interdum lacus, ac lacinia est placerat in. Pellentesque tincidunt auctor mauris, in ultrices velit molestie nec. Maecenas ut lectus imperdiet, malesuada augue quis, laoreet tellus. </p>
-          <div class="button red">Option</div>
-          <div class="button red">Option</div>
-          <div class="button red">Option</div>
-          <div class="button red">Option</div>
+    if(this.props.login_state.authenticated){
+      let number = this.state.current_question;
+      let question = this.state.questions[number];
+      return (
+         <div className="full-page darkblue justified-left aligned-center column">
+           <Prompt login_state={this.props.login_state} number={number} question={question} setQuestion={this.setQuestion} />
         </div>
-      </div>
-    );
+      );
+    }
+    return(<Redirect to="/en/login"/>)
   }
 }
 export default Quiz;

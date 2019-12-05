@@ -19,12 +19,13 @@ with open('questions.json') as json_file:
 def login_required(f):
     @wraps(f)
     def checkLogin(*args,**kwargs):
+        print(request.headers)
         if request.headers.get("auth-token") is None:
-            return jsonify(status = "fail", message = "Auth-token not present in request header")
+            return jsonify(status = "fail", message = "auth-token not present in request header")
         provided = request.headers.get('auth-token')
         token_entry = Token.query.filter_by(value = provided).first()
         if token_entry is None:
-            return jsonify(status = "fail", message = "Auth-token invalid.")
+            return jsonify(status = "fail", message = "auth-token invalid.")
         return f(token_entry.user_id,*args,**kwargs)
     return checkLogin  
 
@@ -37,6 +38,7 @@ def catch_all(path):
 @login_required
 def responseRoute(user_id):
     data = request.json
+    print(data)
     if data.get("question_id") is None or data.get("answer") is None or not isinstance(data.get("question_id"),int):
         return jsonify(status = "fail", message = "Malformed request")
     question_id = data["question_id"]
@@ -52,8 +54,7 @@ def responseRoute(user_id):
 
 @app.route("/api/questions")
 def getQuestion():
-    data = request.json
-    print(data)
+    data = json.loads(request.args.to_dict()['0'])
     if data is None or not isinstance(data,list):
         return jsonify(status = "fail", message = "Malformed request")
     to_return = []
@@ -69,7 +70,6 @@ def getQuestion():
             "answers":answers
         }
         to_return.append(question)
-        
     return jsonify(status = "success", questions = to_return)
 
 @app.route("/api/logout", methods=['POST'])

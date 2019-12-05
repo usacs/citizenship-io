@@ -217,6 +217,18 @@
   border-radius: 2em;
 }
 
+.wrong{
+  opacity:0.6;
+  border: 10px solid rgba(23, 34, 66, 0.4);
+  border-radius: 2em;
+  cursor:initial;
+}
+.correct{
+  background-color:#04bd0d !important;
+  border: 10px solid rgba(23, 34, 66, 0.4);
+  border-radius: 2em;
+}
+
 html {
   height: 100%;
   font-family: Roboto;
@@ -358,6 +370,10 @@ h1 {
 
 .red {
   background-color: #bf2626;
+}
+
+.yellow{
+  background-color:#fcba03;
 }
 
 .darkblue {

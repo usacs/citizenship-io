@@ -26,9 +26,14 @@ class Navbar extends Component {
       }
       else{
         return(
-          <Link className="lightpadding navbar-item navbar-item-login" to="/en/login" >
-           <span>Login</span>
-          </Link>
+          <span className="lightpadding navbar-item-login">
+            <Link className="lightpadding navbar-item" to="/en/signup" >
+              <span>Signup</span>
+            </Link>
+            <Link className="navbar-item" to="/en/login" >
+              <span>Login</span>
+            </Link>
+          </span>
         )
       }
     }
@@ -70,7 +75,7 @@ class App extends Component {
               <Navbar login_state={this.state.login_state} />              
               <Route path="/en/aboutus" component={AboutUs} />
               <Route path="/en/login" render={(props)=><Login {...props} setLogin={this.setLogin}/>}/>
-              <Route path="/en/quiz" render={(props)=><Quiz {...props}/>}/>
+              <Route path="/en/quiz" render={(props)=><Quiz login_state={this.state.login_state} {...props}/>}/>
               <Route path="/en/signup" component={SignUp} />
               <Route path="/en/makeprofile" component={MakeProfile} />
               <Route exact path="/en/" component={HomePage} />
