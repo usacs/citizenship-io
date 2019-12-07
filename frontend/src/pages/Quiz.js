@@ -45,7 +45,6 @@ class QuestionButton extends Component{
   }
   handleClick(){
     if(this.props.correct != 1 && this.props.correct != 2){
-      console.log("sending answer");
       this.props.answerFunc(this.props.id);
     }
   }

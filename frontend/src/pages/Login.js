@@ -36,12 +36,6 @@ class Login extends Component {
       password: this.state.password
     };
     Axios.post(`/api/login`, request).then(res => {
-      console.log(email);
-      console.log(password);
-      // check status code
-
-      console.log(res.data.statusCode);
-
       // if successful re-route to profile
       if (res.data.status === "success") {
         token = res.data.token;
@@ -51,13 +45,6 @@ class Login extends Component {
           authenticated: true
         });
         this.props.history.push("/en/quiz");
-        /*
-         // *** remember to set status code in backend ***
-         this.props.history.push({
-           pathname: "/profile",
-           state: res.data
-         });
-         */
       } else {
         console.log(res.data);
       }

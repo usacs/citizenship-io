@@ -7,3 +7,4 @@ backend/build
 *.swo
 *~
 __pycache__
+.vscode
