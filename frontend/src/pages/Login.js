@@ -58,6 +58,7 @@ class Login extends Component {
           className="centerer fill_container cap-width-50em padded"
           style={{ flexGrow: 2 }}
         >
+          <h1>Login</h1>
           <input
             className="input"
             onChange={this.handleChangeEmail}

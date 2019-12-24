@@ -52,7 +52,6 @@ def answer(user_id,question_id,answer,correct):
         condition = (not Response.query.filter_by(response_id=response_id).first() is None)
 
     response_inst = Response(response_id = response_id, user_id = user_id,question_id = question_id,value = answer, correct = correct)
-    print(response_inst)
     db.session.add(response_inst)
     db.session.commit()
     return True

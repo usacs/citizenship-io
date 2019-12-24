@@ -284,6 +284,11 @@ body {
   justify-content: flex-end;
 }
 
+.justified-center {
+  display: flex;
+  justify-content: center;
+}
+
 .column {
   flex-direction: column;
 }
@@ -388,3 +393,16 @@ h1 {
   background-color: #668cff;
 }
 
+.display-correct {
+  background-color: green;
+  height: 2em;
+  width: 2em;
+  border: solid #1a1a1a;
+}
+
+.display-wrong {
+  background-color: red;
+  height: 2em;
+  width: 2em;
+  border: solid #1a1a1a;
+}

@@ -4,6 +4,7 @@ from db.db_init import db
 from db.models import Response, User, Token
 from imports.db_functions import answer, create_user, login, logout
 from functools import wraps
+from imports.flask_type_checker import typecheck,typefail
 import json
 
 app = Flask(__name__,static_folder="build")
@@ -19,7 +20,6 @@ with open('questions.json') as json_file:
 def login_required(f):
     @wraps(f)
     def checkLogin(*args,**kwargs):
-        print(request.headers)
         if request.headers.get("auth-token") is None:
             return jsonify(status = "fail", message = "auth-token not present in request header")
         provided = request.headers.get('auth-token')
@@ -29,22 +29,27 @@ def login_required(f):
         return f(token_entry.user_id,*args,**kwargs)
     return checkLogin  
 
+
+
+def failure(obj):
+    print(obj)
+    return jsonify(status = "fail", message = "Malformed request") 
+
 @app.route('/en/', defaults={'path': ''})
 @app.route('/en/<path:path>')
 def catch_all(path):
     return app.send_static_file("index.html")
 
 @app.route("/api/response", methods=['POST'])
+@typecheck(name="question_id",type=int)
+@typecheck(name="answer",type=int)
+@typefail(failure)
 @login_required
 def responseRoute(user_id):
     data = request.json
-    print(data)
-    if data.get("question_id") is None or data.get("answer") is None or not isinstance(data.get("question_id"),int):
-        return jsonify(status = "fail", message = "Malformed request")
     question_id = data["question_id"]
     provided_answer = data["answer"]
     correct_answers = questions[question_id]["correct"]
-    print(f"{question_id} | {json.dumps(correct_answers)}") 
     correct = False
     for ans in correct_answers:
         if ans == provided_answer:
@@ -58,7 +63,6 @@ def getQuestion():
     if data is None or not isinstance(data,list):
         return jsonify(status = "fail", message = "Malformed request")
     to_return = []
-    print(data)
     for id in data:
         if not isinstance(id,int):
             return jsonify(status = "fail", message = "Malformed request")
@@ -76,12 +80,13 @@ def getQuestion():
 @login_required
 def logoutRoute(user_id):
     token = request.headers["auth-token"]
-    print(user_id)
     if logout(token):
         return jsonify(status = "success")
     return jsonify(status = "fail")
 
 @app.route("/api/login", methods=['POST'])
+@typecheck(name="email",type=str)
+@typefail(failure)
 def loginRoute():
     data = request.json
     if data.get("email") is None or data.get("password") is None:
